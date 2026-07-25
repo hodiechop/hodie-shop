@@ -24,19 +24,19 @@ function Checkout() {
 
   const handleOrder = async () => {
     if (cart.length === 0) {
-      alert("Your cart is empty!");
+      alert("السلة فارغة");
       return;
     }
 
     if (!name || !email || !phone || !address || !city) {
-      alert("Please fill all fields.");
+      alert("المرجو ملء جميع الخانات");
       return;
     }
 
     const products = cart
       .map(
         (item) =>
-          `${item.name} x${item.quantity} = $${(
+          `${item.name} × ${item.quantity} = $${(
             Number(item.price.replace("$", "")) * item.quantity
           ).toFixed(2)}`
       )
@@ -54,20 +54,29 @@ function Checkout() {
     };
 
     try {
-      await emailjs.send(
+      const result = await emailjs.send(
         "service_5znpjvr",
         "template_bd5sxmb",
         templateParams
       );
 
-      alert("✅ Order sent successfully!");
+      console.log("SUCCESS:", result);
+
+      alert("✅ تم إرسال الطلب بنجاح");
 
       setCart([]);
 
       navigate("/");
     } catch (error) {
-      console.log(error);
-      alert("❌ Failed to send order.");
+      console.log("EMAIL ERROR:", error);
+
+      alert(
+        `❌ فشل الإرسال
+
+Status: ${error.status}
+Text: ${error.text}
+Message: ${JSON.stringify(error)}`
+      );
     }
   };
 
