@@ -1,7 +1,6 @@
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
   background: #111;
   display: flex;
@@ -18,16 +17,15 @@
 
 .menu-icon {
   display: none;
-  color: white;
   font-size: 32px;
+  color: white;
   cursor: pointer;
 }
 
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 30px;
   list-style: none;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
@@ -40,8 +38,8 @@
   color: white;
   text-decoration: none;
   font-size: 18px;
-  position: relative;
   transition: .3s;
+  position: relative;
 }
 
 .nav-links a:hover {
@@ -74,7 +72,7 @@
   padding: 10px 15px;
   border: none;
   outline: none;
-  border-radius: 25px;
+  border-radius: 30px;
 }
 
 .icon {
@@ -98,7 +96,7 @@
   right: -8px;
   background: #e60023;
   color: white;
-  min-width: 18px;
+  width: 18px;
   height: 18px;
   border-radius: 50%;
   display: flex;
@@ -108,13 +106,31 @@
   font-weight: bold;
 }
 
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.username {
+  color: white;
+  font-size: 15px;
+}
+
 /* ================= MOBILE ================= */
 
 @media (max-width:768px){
 
   .navbar{
-    padding:15px 20px;
+    display:flex;
     flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+  }
+
+  .logo img{
+    width:55px;
   }
 
   .menu-icon{
@@ -125,32 +141,34 @@
     display:none;
     width:100%;
     flex-direction:column;
-    background:#111;
+    align-items:center;
+    gap:15px;
     margin-top:15px;
     padding:20px 0;
-    border-radius:10px;
+    background:#111;
   }
 
   .nav-links.active{
     display:flex;
   }
 
-  .nav-links li{
-    margin:10px 0;
-  }
-
   .right-side{
     width:100%;
-    margin-top:15px;
-    justify-content:center;
+    display:flex;
     flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-top:15px;
   }
 
   .search{
     width:100%;
-    max-width:300px;
+    max-width:320px;
   }
 
+  .username{
+    display:none;
+  }
 }
 
 /* ================= SMALL PHONE ================= */
@@ -158,11 +176,11 @@
 @media (max-width:480px){
 
   .logo img{
-    width:55px;
+    width:50px;
   }
 
   .menu-icon{
-    font-size:28px;
+    font-size:30px;
   }
 
   .search{
@@ -172,5 +190,4 @@
   .icon{
     font-size:22px;
   }
-
 }

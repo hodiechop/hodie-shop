@@ -205,4 +205,11 @@
   }
 
 }
+.checkout-page{
+    border:5px solid red;
+}
+
+.checkout-form{
+    border:5px solid blue;
+}
 
