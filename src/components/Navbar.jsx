@@ -12,6 +12,8 @@ function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const username = localStorage.getItem("username");
+
   return (
     <nav className="navbar">
 
@@ -21,7 +23,6 @@ function Navbar() {
         </Link>
       </div>
 
-      {/* Hamburger */}
       <div
         className="menu-icon"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -90,7 +91,15 @@ function Navbar() {
         </div>
 
         {/* User */}
-        <span className="icon">👤</span>
+        <div className="user-box">
+          <span className="icon">👤</span>
+
+          {username && (
+            <span className="username">
+              {username}
+            </span>
+          )}
+        </div>
 
       </div>
 
