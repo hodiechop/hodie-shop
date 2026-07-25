@@ -11,3 +11,10 @@ body {
 html {
   scroll-behavior: smooth;
 }
+button{
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}

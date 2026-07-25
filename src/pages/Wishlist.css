@@ -107,3 +107,13 @@
   }
 
 }
+@media (max-width:768px){
+
+  .cart-item,
+  .wishlist-item{
+    flex-direction:column;
+    text-align:center;
+    gap:20px;
+  }
+
+}
