@@ -1,11 +1,20 @@
 import "./Checkout.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import emailjs from "@emailjs/browser";
+
+emailjs.init("OMUHVFYvnbh_avwhv");
 
 function Checkout() {
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
 
   const total = cart.reduce(
     (sum, item) =>
@@ -13,42 +22,105 @@ function Checkout() {
     0
   );
 
-  const handleOrder = () => {
+  const handleOrder = async () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
       return;
     }
 
-    alert("✅ Your order has been placed successfully!");
+    if (!name || !email || !phone || !address || !city) {
+      alert("Please fill all fields.");
+      return;
+    }
 
-    // Empty Cart
-    setCart([]);
+    const products = cart
+      .map(
+        (item) =>
+          `${item.name} x${item.quantity} = $${(
+            Number(item.price.replace("$", "")) * item.quantity
+          ).toFixed(2)}`
+      )
+      .join("\n");
 
-    // Go Home
-    navigate("/");
+    const templateParams = {
+      name,
+      email,
+      phone,
+      address,
+      city,
+      country: "Morocco",
+      products,
+      total: `$${total.toFixed(2)}`,
+    };
+
+    try {
+      const result = await emailjs.send(
+        "service_5znpjvr",
+        "template_bd5sxmb",
+        templateParams
+      );
+
+      console.log(result);
+
+      alert("✅ Order sent successfully!");
+
+      setCart([]);
+
+      navigate("/");
+    } catch (error) {
+      console.log("EMAIL ERROR:", error);
+
+      alert("❌ " + JSON.stringify(error));
+    }
   };
 
   return (
-    <div className="checkout-page">
+    <div className="checkout">
       <h1>Checkout</h1>
 
       <div className="checkout-container">
-
-        {/* Shipping Form */}
         <div className="checkout-form">
           <h2>Shipping Information</h2>
 
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="Email Address" />
-          <input type="text" placeholder="Phone Number" />
-          <input type="text" placeholder="Address" />
-          <input type="text" placeholder="City" />
-          
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
 
           <h2>Payment Method</h2>
 
           <div className="payment-box">
-            💵 Cash on Delivery (Pay when you receive your order)
+            💵 Cash on Delivery
           </div>
 
           <button
@@ -59,7 +131,6 @@ function Checkout() {
           </button>
         </div>
 
-        {/* Order Summary */}
         <div className="order-summary">
           <h2>Order Summary</h2>
 
@@ -68,7 +139,10 @@ function Checkout() {
           ) : (
             <>
               {cart.map((item) => (
-                <div className="summary-item" key={item.id}>
+                <div
+                  className="summary-item"
+                  key={item.id}
+                >
                   <span>
                     {item.name} × {item.quantity}
                   </span>
@@ -89,7 +163,6 @@ function Checkout() {
             </>
           )}
         </div>
-
       </div>
     </div>
   );

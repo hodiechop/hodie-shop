@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import logo from "../assets/hodie.png";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { CartContext } from "../context/CartContext";
 import { WishlistContext } from "../context/WishlistContext";
@@ -10,22 +10,53 @@ function Navbar() {
   const { cart } = useContext(CartContext);
   const { wishlist } = useContext(WishlistContext);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav className="navbar">
+
       <div className="logo">
         <Link to="/">
-          <img src={logo} alt="Hoodie Shop" />
+          <img src={logo} alt="Logo" />
         </Link>
       </div>
 
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/shop">Shop</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+      {/* Hamburger */}
+      <div
+        className="menu-icon"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
+      </div>
+
+      <ul className={menuOpen ? "nav-links active" : "nav-links"}>
+        <li>
+          <Link to="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/shop" onClick={() => setMenuOpen(false)}>
+            Shop
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>
+            Contact
+          </Link>
+        </li>
       </ul>
 
       <div className="right-side">
+
         <input
           type="text"
           placeholder="Search..."
@@ -60,7 +91,9 @@ function Navbar() {
 
         {/* User */}
         <span className="icon">👤</span>
+
       </div>
+
     </nav>
   );
 }
