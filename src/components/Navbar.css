@@ -1,0 +1,173 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 8%;
+  background: #111;
+  box-sizing: border-box;
+}
+
+.logo img {
+  width: 70px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #e60023;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #e60023;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.search {
+  width: 220px;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.icon {
+  text-decoration: none;
+  color: white;
+  font-size: 26px;
+  transition: 0.3s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+
+  background: #e60023;
+  color: white;
+
+  border-radius: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  border: 2px solid #111;
+}
+
+/* ========================= */
+/* Mobile Responsive Navbar  */
+/* ========================= */
+
+@media (max-width:768px){
+
+  .navbar{
+    flex-direction:column;
+    padding:15px 20px;
+    gap:20px;
+  }
+
+  .logo img{
+    width:60px;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    padding:0;
+  }
+
+  .nav-links li{
+    list-style:none;
+  }
+
+  .nav-links a{
+    font-size:16px;
+  }
+
+  .right-side{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .search{
+    width:100%;
+    max-width:250px;
+  }
+
+  .icon{
+    font-size:24px;
+  }
+
+  .cart-count{
+    top:-6px;
+    right:-6px;
+    width:18px;
+    height:18px;
+    font-size:10px;
+  }
+
+}
+

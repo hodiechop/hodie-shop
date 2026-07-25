@@ -1,0 +1,78 @@
+.products{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.products h2{
+    font-size:40px;
+    margin-bottom:50px;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+.card h3{
+    margin:15px 0;
+}
+
+.card p{
+    color:red;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.card button{
+    margin:20px;
+    padding:10px 25px;
+    background:#e60023;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+.card img{
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+.wishlist-btn{
+    margin-top:10px;
+    padding:10px 20px;
+    background:#111;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.wishlist-btn:hover{
+    background:#e60023;
+}

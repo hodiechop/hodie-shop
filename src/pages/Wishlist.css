@@ -1,0 +1,109 @@
+.wishlist-page {
+  padding: 130px 8% 60px;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+
+.wishlist-page h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 45px;
+}
+
+.empty {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 80px;
+  color: #777;
+}
+
+.wishlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.wishlist-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wishlist-item img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.wishlist-info h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.wishlist-info p {
+  color: red;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.move-btn,
+.remove-btn {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.move-btn {
+  background: #0a7cff;
+}
+
+.move-btn:hover {
+  background: #0067d6;
+}
+
+.remove-btn {
+  background: #e60023;
+}
+
+.remove-btn:hover {
+  background: #c4001d;
+}
+
+@media(max-width:768px){
+
+  .wishlist-item{
+    flex-direction: column;
+    gap:20px;
+    text-align:center;
+  }
+
+  .wishlist-left{
+    flex-direction:column;
+  }
+
+  .wishlist-actions{
+    width:100%;
+    justify-content:center;
+  }
+
+}
