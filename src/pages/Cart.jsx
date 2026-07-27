@@ -13,7 +13,8 @@ function Cart() {
 
   const total = cart.reduce(
     (sum, item) =>
-      sum + Number(item.price.replace("$", "")) * item.quantity,
+      sum +
+      Number(item.price.replace("$", "")) * item.quantity,
     0
   );
 
@@ -27,22 +28,46 @@ function Cart() {
         <>
           <div className="cart-list">
             {cart.map((item, index) => (
-              <div className="cart-item" key={index}>
-                <img src={item.image} alt={item.name} />
+              <div
+                className="cart-item"
+                key={`${item.id}-${item.size}-${index}`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
 
                 <div className="cart-info">
                   <h3>{item.name}</h3>
-                  <p>Size: {item.size}</p>
+
+                  <p>
+                    <strong>Size:</strong> {item.size}
+                  </p>
+
                   <p>{item.price}</p>
 
                   <div className="quantity-box">
-                    <button onClick={() => decreaseQuantity(item.id)}>
+                    <button
+                      onClick={() =>
+                        decreaseQuantity(
+                          item.id,
+                          item.size
+                        )
+                      }
+                    >
                       -
                     </button>
 
                     <span>{item.quantity}</span>
 
-                    <button onClick={() => increaseQuantity(item.id)}>
+                    <button
+                      onClick={() =>
+                        increaseQuantity(
+                          item.id,
+                          item.size
+                        )
+                      }
+                    >
                       +
                     </button>
                   </div>
@@ -50,7 +75,9 @@ function Cart() {
 
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(index)}
+                  onClick={() =>
+                    removeFromCart(index)
+                  }
                 >
                   Remove
                 </button>
@@ -59,13 +86,15 @@ function Cart() {
           </div>
 
           <div className="cart-total">
-            <h2>Total: ${total.toFixed(2)}</h2>
+            <h2>
+              Total: ${total.toFixed(2)}
+            </h2>
 
-       <Link to="/checkout">
-  <button className="checkout-btn">
-    Checkout
-  </button>
-</Link>
+            <Link to="/checkout">
+              <button className="checkout-btn">
+                Proceed To Checkout
+              </button>
+            </Link>
           </div>
         </>
       )}
