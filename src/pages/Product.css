@@ -62,3 +62,8 @@
     padding:10px;
     font-size:18px;
 }
+.active-size{
+    background:#e60023 !important;
+    color:white !important;
+    border:none;
+}

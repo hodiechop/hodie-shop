@@ -62,75 +62,82 @@ function Product() {
     alert("✅ Product added to cart");
   };
 
-  return (
-    <div className="product-page">
-      <img
-        src={product.image}
-        alt={product.name}
-        style={{ width: "300px", marginBottom: "20px" }}
-      />
+ return (
+  <div className="product-details">
 
-      <div className="details">
-        <h1>{product.name}</h1>
+    <img
+      src={product.image}
+      alt={product.name}
+    />
 
-        <h2>{product.price}</h2>
+    <div className="details">
 
-        <p>{product.description}</p>
+      <h1>{product.name}</h1>
 
-        <div className="sizes">
-          <h3>Size</h3>
+      <h2>{product.price}</h2>
 
-          <button
-            className={size === "S" ? "active-size" : ""}
-            onClick={() => setSize("S")}
-          >
-            S
-          </button>
+      <p>{product.description}</p>
 
-          <button
-            className={size === "M" ? "active-size" : ""}
-            onClick={() => setSize("M")}
-          >
-            M
-          </button>
-
-          <button
-            className={size === "L" ? "active-size" : ""}
-            onClick={() => setSize("L")}
-          >
-            L
-          </button>
-
-          <button
-            className={size === "XL" ? "active-size" : ""}
-            onClick={() => setSize("XL")}
-          >
-            XL
-          </button>
-        </div>
-
-        <div className="quantity">
-          <h3>Quantity</h3>
-
-          <input
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={(e) =>
-              setQuantity(Number(e.target.value))
-            }
-          />
-        </div>
+      <div className="sizes">
+        <h3>Size</h3>
 
         <button
-          className="add-cart-btn"
-          onClick={handleAddToCart}
+          className={size === "S" ? "active-size" : ""}
+          onClick={() => setSize("S")}
         >
-          Add To Cart
+          S
         </button>
+
+        <button
+          className={size === "M" ? "active-size" : ""}
+          onClick={() => setSize("M")}
+        >
+          M
+        </button>
+
+        <button
+          className={size === "L" ? "active-size" : ""}
+          onClick={() => setSize("L")}
+        >
+          L
+        </button>
+
+        <button
+          className={size === "XL" ? "active-size" : ""}
+          onClick={() => setSize("XL")}
+        >
+          XL
+        </button>
+
       </div>
+
+      <div className="quantity">
+
+        <h3>Quantity</h3>
+
+        <input
+          type="number"
+          min="1"
+          value={quantity}
+          onChange={(e) =>
+            setQuantity(Number(e.target.value))
+          }
+        />
+
+      </div>
+
+      <button
+        className="add-cart-btn"
+        onClick={handleAddToCart}
+      >
+        Add To Cart
+      </button>
+
     </div>
-  );
+
+  </div>
+);
+
 }
 
 export default Product;
