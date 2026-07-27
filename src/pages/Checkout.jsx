@@ -36,7 +36,7 @@ function Checkout() {
     const products = cart
       .map(
         (item) =>
-          `${item.name} × ${item.quantity} = $${(
+          `${item.name} × ${item.quantity} - $${(
             Number(item.price.replace("$", "")) * item.quantity
           ).toFixed(2)}`
       )
@@ -54,13 +54,13 @@ function Checkout() {
     };
 
     try {
-      const result = await emailjs.send(
+      const response = await emailjs.send(
         "service_5znpjvr",
         "template_bd5sxmb",
         templateParams
       );
 
-      console.log("SUCCESS:", result);
+      console.log("SUCCESS:", response);
 
       alert("✅ تم إرسال الطلب بنجاح");
 
@@ -68,15 +68,9 @@ function Checkout() {
 
       navigate("/");
     } catch (error) {
-      console.log("EMAIL ERROR:", error);
+      console.error("EMAIL ERROR:", error);
 
-      alert(
-        `❌ فشل الإرسال
-
-Status: ${error.status}
-Text: ${error.text}
-Message: ${JSON.stringify(error)}`
-      );
+      alert("❌ وقع خطأ أثناء إرسال الطلب");
     }
   };
 
@@ -85,6 +79,7 @@ Message: ${JSON.stringify(error)}`
       <h1>Checkout</h1>
 
       <div className="checkout-container">
+
         <div className="checkout-form">
           <h2>Shipping Information</h2>
 
@@ -166,6 +161,7 @@ Message: ${JSON.stringify(error)}`
             </>
           )}
         </div>
+
       </div>
     </div>
   );
