@@ -19,7 +19,7 @@ const products = [
   {
     id: 2,
     name: "White Hoodie",
-    price: "$17",
+    price: "17$",
     image: white,
     description: "Classic white hoodie for everyday style.",
   },
