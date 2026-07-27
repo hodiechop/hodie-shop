@@ -1,6 +1,6 @@
 import "./Product.css";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
 import black from "../assets/products/black-hoodie.png";
@@ -43,14 +43,27 @@ function Product() {
   const { id } = useParams();
   const { addToCart } = useContext(CartContext);
 
+  const [size, setSize] = useState("M");
+  const [quantity, setQuantity] = useState(1);
+
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) {
     return <h1>Product not found</h1>;
   }
 
+  const handleAddToCart = () => {
+    addToCart({
+      ...product,
+      size,
+      quantity,
+    });
+
+    alert("✅ Product added to cart");
+  };
+
   return (
-    <div className="product-details">
+    <div className="product-page">
       <img
         src={product.image}
         alt={product.name}
@@ -59,39 +72,65 @@ function Product() {
 
       <div className="details">
         <h1>{product.name}</h1>
+
         <h2>{product.price}</h2>
+
         <p>{product.description}</p>
 
         <div className="sizes">
           <h3>Size</h3>
-          <button>S</button>
-          <button>M</button>
-          <button>L</button>
-          <button>XL</button>
+
+          <button
+            className={size === "S" ? "active-size" : ""}
+            onClick={() => setSize("S")}
+          >
+            S
+          </button>
+
+          <button
+            className={size === "M" ? "active-size" : ""}
+            onClick={() => setSize("M")}
+          >
+            M
+          </button>
+
+          <button
+            className={size === "L" ? "active-size" : ""}
+            onClick={() => setSize("L")}
+          >
+            L
+          </button>
+
+          <button
+            className={size === "XL" ? "active-size" : ""}
+            onClick={() => setSize("XL")}
+          >
+            XL
+          </button>
         </div>
 
         <div className="quantity">
           <h3>Quantity</h3>
-          <input type="number" min="1" defaultValue="1" />
+
+          <input
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(e) =>
+              setQuantity(Number(e.target.value))
+            }
+          />
         </div>
 
         <button
-  onClick={() => {
-    alert("clicked");
-
-    if (addToCart) {
-      addToCart(product);
-    } else {
-      alert("addToCart is undefined");
-    }
-  }}
->
-  Add To Cart
-</button>
+          className="add-cart-btn"
+          onClick={handleAddToCart}
+        >
+          Add To Cart
+        </button>
       </div>
     </div>
   );
 }
-
 
 export default Product;

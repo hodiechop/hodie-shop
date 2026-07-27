@@ -7,18 +7,26 @@ function CartProvider({ children }) {
 
   // Add To Cart
   const addToCart = (product) => {
-    const exist = cart.find((item) => item.id === product.id);
+    const exist = cart.find(
+      (item) =>
+        item.id === product.id &&
+        item.size === product.size
+    );
 
     if (exist) {
       setCart(
         cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+          item.id === product.id &&
+          item.size === product.size
+            ? {
+                ...item,
+                quantity: item.quantity + product.quantity,
+              }
             : item
         )
       );
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart([...cart, product]);
     }
   };
 
@@ -28,10 +36,10 @@ function CartProvider({ children }) {
   };
 
   // Increase Quantity
-  const increaseQuantity = (id) => {
+  const increaseQuantity = (id, size) => {
     setCart(
       cart.map((item) =>
-        item.id === id
+        item.id === id && item.size === size
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
@@ -39,11 +47,11 @@ function CartProvider({ children }) {
   };
 
   // Decrease Quantity
-  const decreaseQuantity = (id) => {
+  const decreaseQuantity = (id, size) => {
     setCart(
       cart
         .map((item) =>
-          item.id === id
+          item.id === id && item.size === size
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )

@@ -34,14 +34,17 @@ function Checkout() {
     }
 
     const products = cart
-      .map(
-        (item) =>
-          `${item.name} × ${item.quantity} - $${(
-            Number(item.price.replace("$", "")) * item.quantity
-          ).toFixed(2)}`
-      )
-      .join("\n");
-
+  .map(
+    (item) =>
+      `${item.name}
+Size: ${item.size}
+Quantity: ${item.quantity}
+Price: $${(
+        Number(item.price.replace("$", "")) * item.quantity
+      ).toFixed(2)}`
+  )
+  .join("\n\n");
+  
     const templateParams = {
       name,
       email,
@@ -142,7 +145,9 @@ function Checkout() {
               {cart.map((item) => (
                 <div className="summary-item" key={item.id}>
                   <span>
-                    {item.name} × {item.quantity}
+                  ${item.name}
+                  Size: ${item.size}
+                  Quantity: ${item.quantity}
                   </span>
 
                   <span>
