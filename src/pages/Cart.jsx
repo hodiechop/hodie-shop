@@ -11,12 +11,14 @@ function Cart() {
     decreaseQuantity,
   } = useContext(CartContext);
 
-  const total = cart.reduce(
-    (sum, item) =>
-      sum +
-      Number(item.price.replace("$", "")) * item.quantity,
-    0
-  );
+  const total = cart.reduce((sum, item) => {
+    const price =
+      typeof item.price === "string"
+        ? Number(item.price.replace("$", "").replace("£", ""))
+        : Number(item.price);
+
+    return sum + price * item.quantity;
+  }, 0);
 
   return (
     <div className="cart-page">
@@ -44,7 +46,11 @@ function Cart() {
                     <strong>Size:</strong> {item.size}
                   </p>
 
-                  <p>{item.price}</p>
+                  <p>
+                    {typeof item.price === "number"
+                      ? `$${item.price}`
+                      : item.price}
+                  </p>
 
                   <div className="quantity-box">
                     <button
@@ -75,9 +81,7 @@ function Cart() {
 
                 <button
                   className="remove-btn"
-                  onClick={() =>
-                    removeFromCart(index)
-                  }
+                  onClick={() => removeFromCart(index)}
                 >
                   Remove
                 </button>
@@ -86,9 +90,7 @@ function Cart() {
           </div>
 
           <div className="cart-total">
-            <h2>
-              Total: ${total.toFixed(2)}
-            </h2>
+            <h2>Total: ${total.toFixed(2)}</h2>
 
             <Link to="/checkout">
               <button className="checkout-btn">

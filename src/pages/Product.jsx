@@ -19,7 +19,7 @@ const products = [
   {
     id: 2,
     name: "White Hoodie",
-    price: "17$",
+    price: "$17",
     image: white,
     description: "Classic white hoodie for everyday style.",
   },
@@ -49,7 +49,7 @@ function Product() {
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) {
-    return <h1>Product not found</h1>;
+    return <h2>Product Not Found</h2>;
   }
 
   const handleAddToCart = () => {
@@ -62,83 +62,74 @@ function Product() {
     alert("✅ Product added to cart");
   };
 
- return (
-  <div className="product-details">
+  return (
+    <div className="product-details">
+      <img
+        src={product.image}
+        alt={product.name}
+      />
 
-    <img
-      src={product.image}
-      alt={product.name}
-    />
+      <div className="details">
+        <h1>{product.name}</h1>
 
-    <div className="details">
+        <h2>{product.price}</h2>
 
-      <h1>{product.name}</h1>
+        <p>{product.description}</p>
 
-      <h2>{product.price}</h2>
+        <div className="sizes">
+          <h3>Size</h3>
 
-      <p>{product.description}</p>
+          <button
+            className={size === "S" ? "active-size" : ""}
+            onClick={() => setSize("S")}
+          >
+            S
+          </button>
 
-      <div className="sizes">
-        <h3>Size</h3>
+          <button
+            className={size === "M" ? "active-size" : ""}
+            onClick={() => setSize("M")}
+          >
+            M
+          </button>
+
+          <button
+            className={size === "L" ? "active-size" : ""}
+            onClick={() => setSize("L")}
+          >
+            L
+          </button>
+
+          <button
+            className={size === "XL" ? "active-size" : ""}
+            onClick={() => setSize("XL")}
+          >
+            XL
+          </button>
+        </div>
+
+        <div className="quantity">
+          <h3>Quantity</h3>
+
+          <input
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(e) =>
+              setQuantity(Number(e.target.value))
+            }
+          />
+        </div>
 
         <button
-          className={size === "S" ? "active-size" : ""}
-          onClick={() => setSize("S")}
+          className="add-cart-btn"
+          onClick={handleAddToCart}
         >
-          S
+          Add To Cart
         </button>
-
-        <button
-          className={size === "M" ? "active-size" : ""}
-          onClick={() => setSize("M")}
-        >
-          M
-        </button>
-
-        <button
-          className={size === "L" ? "active-size" : ""}
-          onClick={() => setSize("L")}
-        >
-          L
-        </button>
-
-        <button
-          className={size === "XL" ? "active-size" : ""}
-          onClick={() => setSize("XL")}
-        >
-          XL
-        </button>
-
       </div>
-
-      <div className="quantity">
-
-        <h3>Quantity</h3>
-
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={(e) =>
-            setQuantity(Number(e.target.value))
-          }
-        />
-
-      </div>
-
-      <button
-        className="add-cart-btn"
-        onClick={handleAddToCart}
-      >
-        Add To Cart
-      </button>
-
     </div>
-
-  </div>
-);
-
+  );
 }
 
 export default Product;
-
