@@ -20,7 +20,8 @@ function CartProvider({ children }) {
           item.size === product.size
             ? {
                 ...item,
-                quantity: item.quantity + product.quantity,
+                quantity:
+                  item.quantity + product.quantity,
               }
             : item
         )
@@ -30,29 +31,37 @@ function CartProvider({ children }) {
     }
   };
 
-  // Remove Product
+  // Remove
   const removeFromCart = (index) => {
     setCart(cart.filter((_, i) => i !== index));
   };
 
-  // Increase Quantity
+  // Increase
   const increaseQuantity = (id, size) => {
     setCart(
       cart.map((item) =>
-        item.id === id && item.size === size
-          ? { ...item, quantity: item.quantity + 1 }
+        item.id === id &&
+        item.size === size
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
           : item
       )
     );
   };
 
-  // Decrease Quantity
+  // Decrease
   const decreaseQuantity = (id, size) => {
     setCart(
       cart
         .map((item) =>
-          item.id === id && item.size === size
-            ? { ...item, quantity: item.quantity - 1 }
+          item.id === id &&
+          item.size === size
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
             : item
         )
         .filter((item) => item.quantity > 0)
@@ -63,6 +72,7 @@ function CartProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
+        setCart,
         addToCart,
         removeFromCart,
         increaseQuantity,

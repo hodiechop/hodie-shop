@@ -14,28 +14,32 @@ const products = [
     name: "Black Hoodie",
     price: "$17",
     image: black,
-    description: "Comfortable black hoodie made from premium cotton.",
+    description:
+      "Comfortable black hoodie made from premium cotton.",
   },
   {
     id: 2,
     name: "White Hoodie",
     price: "$17",
     image: white,
-    description: "Classic white hoodie for everyday style.",
+    description:
+      "Classic white hoodie for everyday style.",
   },
   {
     id: 3,
     name: "Red T-Shirt",
     price: "$15",
     image: red,
-    description: "Soft red t-shirt with modern fit.",
+    description:
+      "Soft red t-shirt with modern fit.",
   },
   {
     id: 4,
     name: "Grey Hoodie",
     price: "$17",
     image: grey,
-    description: "Warm grey hoodie with premium quality.",
+    description:
+      "Warm grey hoodie with premium quality.",
   },
 ];
 
@@ -46,7 +50,9 @@ function Product() {
   const [size, setSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
 
-  const product = products.find((p) => p.id === Number(id));
+  const product = products.find(
+    (p) => p.id === Number(id)
+  );
 
   if (!product) {
     return <h2>Product Not Found</h2>;
@@ -59,7 +65,7 @@ function Product() {
       quantity,
     });
 
-    alert("✅ Product added to cart");
+    alert("✅ Product Added To Cart");
   };
 
   return (
@@ -79,33 +85,17 @@ function Product() {
         <div className="sizes">
           <h3>Size</h3>
 
-          <button
-            className={size === "S" ? "active-size" : ""}
-            onClick={() => setSize("S")}
-          >
-            S
-          </button>
-
-          <button
-            className={size === "M" ? "active-size" : ""}
-            onClick={() => setSize("M")}
-          >
-            M
-          </button>
-
-          <button
-            className={size === "L" ? "active-size" : ""}
-            onClick={() => setSize("L")}
-          >
-            L
-          </button>
-
-          <button
-            className={size === "XL" ? "active-size" : ""}
-            onClick={() => setSize("XL")}
-          >
-            XL
-          </button>
+          {["S", "M", "L", "XL"].map((s) => (
+            <button
+              key={s}
+              className={
+                size === s ? "active-size" : ""
+              }
+              onClick={() => setSize(s)}
+            >
+              {s}
+            </button>
+          ))}
         </div>
 
         <div className="quantity">

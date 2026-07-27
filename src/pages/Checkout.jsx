@@ -16,11 +16,10 @@ function Checkout() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
 
-  const total = cart.reduce(
-    (sum, item) =>
-      sum + Number(item.price.replace("$", "")) * item.quantity,
-    0
-  );
+  const total = cart.reduce((sum, item) => {
+    const price = Number(String(item.price).replace("$", ""));
+    return sum + price * item.quantity;
+  }, 0);
 
   const handleOrder = async () => {
     if (cart.length === 0) {
@@ -34,17 +33,18 @@ function Checkout() {
     }
 
     const products = cart
-  .map(
-    (item) =>
-      `${item.name}
-Size: ${item.size}
-Quantity: ${item.quantity}
-Price: $${(
-        Number(item.price.replace("$", "")) * item.quantity
-      ).toFixed(2)}`
-  )
-  .join("\n\n");
-  
+      .map((item) => {
+        const price = Number(String(item.price).replace("$", ""));
+
+        return `
+Product : ${item.name}
+Size : ${item.size}
+Quantity : ${item.quantity}
+Price : $${(price * item.quantity).toFixed(2)}
+`;
+      })
+      .join("\n-----------------------\n");
+
     const templateParams = {
       name,
       email,
@@ -57,13 +57,11 @@ Price: $${(
     };
 
     try {
-      const response = await emailjs.send(
+      await emailjs.send(
         "service_5znpjvr",
         "template_bd5sxmb",
         templateParams
       );
-
-      console.log("SUCCESS:", response);
 
       alert("✅ تم إرسال الطلب بنجاح");
 
@@ -71,18 +69,14 @@ Price: $${(
 
       navigate("/");
     } catch (error) {
-      console.error("EMAIL ERROR:", error);
-
+      console.error(error);
       alert("❌ وقع خطأ أثناء إرسال الطلب");
     }
   };
 
   return (
-    <div className="checkout-page">
-      <h1>Checkout</h1>
-
+    <div className="checkout">
       <div className="checkout-container">
-
         <div className="checkout-form">
           <h2>Shipping Information</h2>
 
@@ -124,7 +118,7 @@ Price: $${(
           <h2>Payment Method</h2>
 
           <div className="payment-box">
-            💵 Cash on Delivery
+            💵 Cash On Delivery
           </div>
 
           <button
@@ -142,23 +136,31 @@ Price: $${(
             <p>Your cart is empty.</p>
           ) : (
             <>
-              {cart.map((item) => (
-                <div className="summary-item" key={item.id}>
-                  <span>
-                  ${item.name}
-                  Size: ${item.size}
-                  Quantity: ${item.quantity}
-                  </span>
+              {cart.map((item, index) => {
+                const price = Number(
+                  String(item.price).replace("$", "")
+                );
 
-                  <span>
-                    $
-                    {(
-                      Number(item.price.replace("$", "")) *
-                      item.quantity
-                    ).toFixed(2)}
-                  </span>
-                </div>
-              ))}
+                return (
+                  <div
+                    className="summary-item"
+                    key={index}
+                  >
+                    <div>
+                      <strong>{item.name}</strong>
+
+                      <p>Size: {item.size}</p>
+
+                      <p>Quantity: {item.quantity}</p>
+                    </div>
+
+                    <span>
+                      $
+                      {(price * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                );
+              })}
 
               <hr />
 
@@ -166,7 +168,6 @@ Price: $${(
             </>
           )}
         </div>
-
       </div>
     </div>
   );
