@@ -1,46 +1,80 @@
 .products {
-  padding: 80px 8%;
-  text-align: center;
+  padding: 120px 8% 60px;
   background: #f8f8f8;
+  min-height: 100vh;
 }
 
 .products h2 {
-  font-size: 40px;
-  margin-bottom: 50px;
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #111;
 }
+
+/* ===== Search ===== */
+
+.products-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.products-search input {
+  width: 420px;
+  max-width: 90%;
+  padding: 14px 20px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.products-search input:focus {
+  border-color: #e60023;
+  box-shadow: 0 0 10px rgba(230, 0, 35, 0.2);
+}
+
+/* ===== Products Grid ===== */
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
 }
 
+/* ===== Card ===== */
+
 .card {
   background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,.1);
-  transition: .4s;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
 
 .card img {
   width: 100%;
   height: 300px;
   object-fit: cover;
-  transition: .4s;
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
 .card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .card h3 {
-  margin: 15px 0 10px;
+  margin: 20px 0 10px;
   font-size: 22px;
+  color: #111;
 }
 
 .card p {
@@ -49,112 +83,129 @@
   font-weight: bold;
 }
 
+/* ===== Buttons ===== */
+
 .card button {
-  margin: 10px;
-  padding: 10px 20px;
   border: none;
+  padding: 12px 18px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
   transition: .3s;
 }
 
 .card button:first-child {
-  background: #e60023;
-  color: white;
-}
-
-.card button:first-child:hover {
-  background: #b8001c;
-}
-
-.wishlist-btn {
   background: #111;
   color: white;
 }
 
-.wishlist-btn:hover {
+.card button:first-child:hover {
   background: #e60023;
 }
 
-/* ================= Tablet ================= */
+.wishlist-btn {
+  background: #ffe8ec;
+  color: #e60023;
+}
 
-@media (max-width: 992px) {
+.wishlist-btn:hover {
+  background: #e60023;
+  color: white;
+}
 
-  .products {
-    padding: 70px 5%;
-  }
+/* ===== No Products ===== */
 
-  .products h2 {
-    font-size: 34px;
-  }
+.no-products {
+  width: 100%;
+  text-align: center;
+  color: #e60023;
+  font-size: 26px;
+  margin-top: 40px;
+}
 
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+/* ===== Tablet ===== */
+
+@media (max-width:992px){
+
+.products{
+  padding:110px 5% 50px;
+}
+
+.products h2{
+  font-size:36px;
+}
+
+.products-grid{
+  grid-template-columns:repeat(2,1fr);
+}
 
 }
 
-/* ================= Mobile ================= */
+/* ===== Mobile ===== */
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-  .products {
-    padding: 60px 20px;
-  }
+.products{
+  padding:100px 20px 40px;
+}
 
-  .products h2 {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
+.products h2{
+  font-size:30px;
+}
 
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
+.products-search input{
+  width:100%;
+  font-size:15px;
+}
 
-  .card img {
-    height: 260px;
-  }
+.products-grid{
+  grid-template-columns:1fr;
+}
 
-  .card h3 {
-    font-size: 20px;
-  }
+.card img{
+  height:260px;
+}
 
-  .card p {
-    font-size: 18px;
-  }
+.card button{
+  width:100%;
+}
 
-  .card button {
-    width: 90%;
-    margin: 8px auto;
-    display: block;
-  }
+.card div{
+  flex-direction:column;
+}
 
 }
 
-/* ================= Small Phones ================= */
+/* ===== Small Phones ===== */
 
-@media (max-width: 480px) {
+@media (max-width:480px){
 
-  .products {
-    padding: 50px 15px;
-  }
+.products{
+  padding:90px 15px 30px;
+}
 
-  .products h2 {
-    font-size: 26px;
-  }
+.products h2{
+  font-size:26px;
+}
 
-  .card img {
-    height: 220px;
-  }
+.card{
+  padding:15px;
+}
 
-  .card h3 {
-    font-size: 18px;
-  }
+.card img{
+  height:230px;
+}
 
-  .card p {
-    font-size: 17px;
-  }
+.card h3{
+  font-size:20px;
+}
+
+.card p{
+  font-size:18px;
+}
+
+.products-search input{
+  padding:12px 16px;
+}
 
 }

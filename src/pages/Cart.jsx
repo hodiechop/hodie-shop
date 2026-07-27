@@ -32,6 +32,7 @@ function Cart() {
 
                 <div className="cart-info">
                   <h3>{item.name}</h3>
+                  <p>Size: {item.size}</p>
                   <p>{item.price}</p>
 
                   <div className="quantity-box">
