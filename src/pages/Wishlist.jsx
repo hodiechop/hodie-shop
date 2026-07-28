@@ -15,7 +15,10 @@ function Wishlist() {
         <div className="wishlist-list">
           {wishlist.map((item) => (
             <div className="wishlist-item" key={item.id}>
-              <img src={item.image} alt={item.name} />
+              <img
+  src={item.images ? item.images[0] : item.image}
+  alt={item.name}
+/>
 
               <div className="wishlist-info">
                 <h3>{item.name}</h3>

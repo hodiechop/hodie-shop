@@ -12,7 +12,7 @@ const products = [
   {
     id: 1,
     name: "Black Hoodie",
-    price: "$17",
+    price: 170,
     image: black,
     description:
       "Comfortable black hoodie made from premium cotton.",
@@ -20,7 +20,7 @@ const products = [
   {
     id: 2,
     name: "White Hoodie",
-    price: "$17",
+    price: 170,
     image: white,
     description:
       "Classic white hoodie for everyday style.",
@@ -28,7 +28,7 @@ const products = [
   {
     id: 3,
     name: "Red T-Shirt",
-    price: "$15",
+    price: 150,
     image: red,
     description:
       "Soft red t-shirt with modern fit.",
@@ -36,7 +36,7 @@ const products = [
   {
     id: 4,
     name: "Grey Hoodie",
-    price: "$17",
+    price: 170,
     image: grey,
     description:
       "Warm grey hoodie with premium quality.",
@@ -78,7 +78,7 @@ function Product() {
       <div className="details">
         <h1>{product.name}</h1>
 
-        <h2>{product.price}</h2>
+        <h2>{product.price} DH</h2>
 
         <p>{product.description}</p>
 

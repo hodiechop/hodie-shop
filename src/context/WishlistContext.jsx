@@ -4,21 +4,26 @@ export const WishlistContext = createContext();
 
 function WishlistProvider({ children }) {
   const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem("wishlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const savedWishlist = localStorage.getItem("wishlist");
+  return savedWishlist ? JSON.parse(savedWishlist) : [];
+});
 
-  useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+useEffect(() => {
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}, [wishlist]);
 
-  const addToWishlist = (product) => {
-    const exist = wishlist.find((item) => item.id === product.id);
 
-    if (!exist) {
-      setWishlist([...wishlist, product]);
-    }
-  };
+const addToWishlist = (product) => {
+  const exist = wishlist.find((item) => item.id === product.id);
+
+  if (exist) {
+    setWishlist(
+      wishlist.filter((item) => item.id !== product.id)
+    );
+  } else {
+    setWishlist([...wishlist, product]);
+  }
+};
 
   const removeFromWishlist = (id) => {
     setWishlist(wishlist.filter((item) => item.id !== id));

@@ -1,28 +1,49 @@
 import "./Navbar.css";
 import logo from "../assets/hodie.png";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 
+import { ThemeContext } from "../context/ThemeContext";
 import { CartContext } from "../context/CartContext";
 import { WishlistContext } from "../context/WishlistContext";
 
 function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { cart } = useContext(CartContext);
   const { wishlist } = useContext(WishlistContext);
-
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   const username = localStorage.getItem("username");
 
-  return (
-    <nav className="navbar">
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const cartCount = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  return (
+    <nav className={scrolled ? "navbar scrolled" : "navbar"}>
+      {/* Logo */}
       <div className="logo">
         <Link to="/">
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="HODIE SHOP" />
         </Link>
       </div>
 
+      {/* Mobile Menu */}
       <div
         className="menu-icon"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -30,69 +51,72 @@ function Navbar() {
         ☰
       </div>
 
+      {/* Links */}
       <ul className={menuOpen ? "nav-links active" : "nav-links"}>
         <li>
-          <Link to="/" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/" onClick={() => setMenuOpen(false)}>
             Home
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/shop" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/shop" onClick={() => setMenuOpen(false)}>
             Shop
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/about" onClick={() => setMenuOpen(false)}>
             About
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
             Contact
-          </Link>
+          </NavLink>
         </li>
       </ul>
 
+      {/* Right Side */}
       <div className="right-side">
-
-        <input
-          type="text"
-          placeholder="Search..."
-          className="search"
-        />
-
         {/* Wishlist */}
-        <div className="cart-icon">
-          <Link to="/wishlist" className="icon">
+        <div className="icon-box">
+          <Link to="/wishlist" className="icon-link">
             ❤️
           </Link>
 
           {wishlist.length > 0 && (
-            <span className="cart-count">
+            <span className="counter">
               {wishlist.length}
             </span>
           )}
         </div>
 
         {/* Cart */}
-        <div className="cart-icon">
-          <Link to="/cart" className="icon">
+        <div className="icon-box">
+          <Link to="/cart" className="cart-link">
             🛒
           </Link>
 
-          {cart.length > 0 && (
-            <span className="cart-count">
-              {cart.length}
+          {cartCount > 0 && (
+            <span className="counter">
+              {cartCount}
             </span>
           )}
         </div>
 
+        {/* Theme */}
+        <button
+          className="theme-btn"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "☀️" : "🌙"}
+        </button>
+
         {/* User */}
         <div className="user-box">
-          <span className="icon">👤</span>
+          <span className="user-icon">👤</span>
 
           {username && (
             <span className="username">
@@ -100,9 +124,7 @@ function Navbar() {
             </span>
           )}
         </div>
-
       </div>
-
     </nav>
   );
 }

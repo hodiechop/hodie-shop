@@ -18,3 +18,77 @@ button{
 button:hover{
     transform:translateY(-2px);
 }
+/* Theme Button */
+
+.theme-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#222;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.theme-btn:hover{
+    background:#e60023;
+    transform:rotate(180deg);
+}
+/* ===========================
+   DARK MODE
+=========================== */
+
+body{
+    transition: .3s;
+}
+
+body.dark{
+    background:#111;
+    color:#fff;
+}
+
+body.dark .navbar{
+    background:#1a1a1a;
+}
+
+body.dark .products{
+    background:#181818;
+}
+
+body.dark .card{
+    background:#222;
+    color:#fff;
+}
+
+body.dark .card h3{
+    color:#fff;
+}
+
+body.dark .products h2{
+    color:#fff;
+}
+
+body.dark .products-search input,
+body.dark .products-search select{
+    background:#2a2a2a;
+    color:#fff;
+}
+
+body.dark .search{
+    background:#2a2a2a;
+    color:#fff;
+}
+
+body.dark .user-box{
+    background:#333;
+}
+
+body.dark .theme-btn{
+    background:#444;
+}
+
+body.dark .price{
+    color:#ff4d6d;
+}

@@ -11,14 +11,10 @@ function Cart() {
     decreaseQuantity,
   } = useContext(CartContext);
 
-  const total = cart.reduce((sum, item) => {
-    const price =
-      typeof item.price === "string"
-        ? Number(item.price.replace("$", "").replace("£", ""))
-        : Number(item.price);
-
-    return sum + price * item.quantity;
-  }, 0);
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="cart-page">
@@ -34,10 +30,11 @@ function Cart() {
                 className="cart-item"
                 key={`${item.id}-${item.size}-${index}`}
               >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                />
+<img
+  src={item.images ? item.images[0] : item.image}
+  alt={item.name}
+/>
+
 
                 <div className="cart-info">
                   <h3>{item.name}</h3>
@@ -46,11 +43,7 @@ function Cart() {
                     <strong>Size:</strong> {item.size}
                   </p>
 
-                  <p>
-                    {typeof item.price === "number"
-                      ? `$${item.price}`
-                      : item.price}
-                  </p>
+                  <p>{item.price} DH</p>
 
                   <div className="quantity-box">
                     <button
@@ -81,7 +74,9 @@ function Cart() {
 
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(index)}
+                  onClick={() =>
+                    removeFromCart(index)
+                  }
                 >
                   Remove
                 </button>
@@ -90,7 +85,7 @@ function Cart() {
           </div>
 
           <div className="cart-total">
-            <h2>Total: ${total.toFixed(2)}</h2>
+            <h2>Total: {total.toFixed(2)} DH</h2>
 
             <Link to="/checkout">
               <button className="checkout-btn">
